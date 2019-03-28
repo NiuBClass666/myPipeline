@@ -10,7 +10,9 @@ One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC
 
 ## How to install and get it up and running
 1. Install terraform
-2. Git 
+2. Git clone this repo
+3. terraform init
+4. terraform apply
 
 <hr/>
 
