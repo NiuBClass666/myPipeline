@@ -21,16 +21,13 @@ apt-get install -y docker-ce
 
 apt-get update
 
-env JAVA_OPTS= " -Djenkins.install.runSetupWizard=false " 
+docker run -d --name jenkins -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 -p 50000:50000 liyuansdockerhub/jenkins 
 
-apt-get install jenkins -y
+sleep 30
 
-java -jar /tmp/jenkins-cli.jar -s http://localhost:8080/ create-job autoBuildFlask < /tmp/template.xml --username admin --password admin
+java -jar /tmp/jenkins-cli.jar -s http://localhost:8080/ -auth admin:admin create-job autoBuild < /tmp/template.xml
 
-sudo service jenkins restart
 
-gpasswd -a jenkins docker
-service docker restart
 
 
 

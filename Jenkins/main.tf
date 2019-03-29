@@ -6,7 +6,7 @@ resource"aws_instance""jenkins"{
   key_name               = "${var.key_pair_id}"
   vpc_security_group_ids = ["${var.security_group_id}"]
   subnet_id              = "${var.subnet_id}"
-  user_data              = "${file("./Jenkins/local-exec.sh")}"
+  user_data              = "${file("./Jenkins/local-exec2.sh")}"
 
   tags {
       Name = "${format("%s%02d", var.group_name, count.index + 1)}" # -> "backend02"
