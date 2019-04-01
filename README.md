@@ -20,7 +20,7 @@ One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC
 The web application repo is at https://github.com/LiyuanWang123/InsightDevopsProject where dockerfile and jenkinsfile are located.
 
 
-For demo purpose, that repo is fixed. However, if you want to change the repo to your repo, you need to change the repo link to your repo in job "autoBuild"'s configuration on jenkins server, then add your credentials for both github and your image registry. Also in Jenkinsfile, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added on jenkins server and finally put jenkinsfile into your repo and copy paste the dockerfile to your repo. Then you can try git push new change of your application and see the pipeline performance. 
+For demo purpose, that repo is fixed. However, if you want to change the repo to your repo, you need to change the repo link to your repo in job "autoBuild"'s configuration on jenkins server, then add your credentials for both github and your image registry. Also in Jenkinsfile, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server and finally put jenkinsfile into your repo and the dockerfile to your repo. Then you can try git push new change of your application and see the pipeline performance. 
 
 
 
