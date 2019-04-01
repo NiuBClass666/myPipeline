@@ -1,0 +1,7 @@
+<com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@2.1.18">                                      
+<scope>GLOBAL</scope>
+  <id>Github-Repo</id>
+  <description></description>
+  <username>liyuanwang123</username>
+  <password>946060wly</password>                                                                                                            
+</com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>

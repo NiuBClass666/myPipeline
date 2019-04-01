@@ -28,9 +28,7 @@ resource"aws_instance""jenkins"{
         agent = false
     } 
   }
-
 }
-
 data "aws_ami" "ubuntu" {
     most_recent = true
 filter {

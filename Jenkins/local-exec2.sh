@@ -23,12 +23,20 @@ apt-get update
 
 docker run -d --name jenkins -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 -p 50000:50000 liyuansdockerhub/jenkins 
 
+
 sleep 30
+
+chmod 777 /var/run/docker.sock 
 
 java -jar /tmp/jenkins-cli.jar -s http://localhost:8080/ -auth admin:admin create-job autoBuild < /tmp/template.xml
 
+sleep 10
 
+java -jar /tmp/jenkins-cli.jar -s http://localhost:8080 -auth admin:admin create-credentials-by-xml system::system::jenkins "(global)"  <  /tmp/docker-hub-credentials.xml
+java -jar /tmp/jenkins-cli.jar -s http://localhost:8080 -auth admin:admin create-credentials-by-xml system::system::jenkins "(global)"  <  /tmp/Github-Repo.xml
 
+sleep 1m
 
+curl http://0.0.0.0:8080/git/notifyCommit?url=https://github.com/LiyuanWang123/InsightDevopsProject
 
 
