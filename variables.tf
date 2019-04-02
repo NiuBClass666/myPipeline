@@ -1,8 +1,10 @@
 variable "access_key" {
-	default = "AKIAIQXXFEH3KSRE64RA"
+	default = ""
+
 }
 variable "secret_key" {
-	default = "Wbbvh9R1iwaPaTfd/asG9+KrE+NIxoQXrH0Bs34M"
+	default = ""
+
 }
 variable "region" {
   description = "AWS region to launch servers."

@@ -1,9 +1,3 @@
-variable "access_key" {
-	default = "AKIAIQXXFEH3KSRE64RA"
-}
-variable "secret_key" {
-	default = "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"
-}
 variable "region" {
   description = "AWS region to launch servers."
   default = "us-west-2"
@@ -28,7 +22,7 @@ variable "group_name" {
 
 variable "instance_type" {
   description = "AWS region to launch servers."
-  default     = "t2.micro"
+  default     = "t2.medium"
 }
 
 variable "subnet_id" {
