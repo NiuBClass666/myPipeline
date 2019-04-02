@@ -11,8 +11,18 @@ One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC
 ## How to install and get it up and running
 1. Install terraform
 2. Git clone this repo
-3. terraform init
-4. terraform apply
+3. Input your AWS access_key, secret_key, region preffered, key pair ID and path to your-keypair.pem in variables.tf. (Demo purpose only, Do not left them there and push to your repo!)
+4. terraform init
+5. terraform apply
+6. Now you can find the web application at http://Your-web-EC2-ip:8000 and jenkins server at http://Your-jenkins-EC2-ip:8080
+
+
+The web application repo is at https://github.com/LiyuanWang123/InsightDevopsProject where dockerfile and jenkinsfile are located.
+
+
+For demo purpose, that repo is fixed. However, if you want to change the repo to your repo, you need to change the repo link to your repo in job "autoBuild"'s configuration on jenkins server, then add your credentials for both github and your image registry. Also in Jenkinsfile, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server and finally put jenkinsfile into your repo and the dockerfile to your repo. Then you can try git push new change of your application and see the pipeline performance. 
+
+
 
 <hr/>
 
