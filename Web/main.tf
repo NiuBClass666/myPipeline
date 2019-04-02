@@ -18,30 +18,8 @@ resource"aws_instance""Web"{
   }
   
   lifecycle {
-    create_before_destroy = false
+    create_before_destroy = true
   }
-  
-  # Provisioning
-  
-  #connection {
-  #  user = "ubuntu"
-  #  private_key = "${file(var.private_key_path)}"
-  #}
-
-  #provisioner "remote-exec" {
-  #  inline = [
-  #    "sudo apt-get update",
-  #    "sudo apt install apt-transport-https ca-certificates curl software-properties-common -y",
-  #    "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
-  #    "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable #edge\" ",
-  #    "sudo apt-get update ",
-  #    "sudo apt-get install -y docker-ce",
-  #
-  #    "sudo docker run -d   --name web --rm -p 8000:8000 liyuansdockerhub/insight_project",
-  #    "sudo docker run -d   --name watchtower   -v /var/run/docker.sock:/var/run/docker.sock  v2tec/watchtower -i 30",
-  #    
-  #  ]
-  #}
 }
 
 data "aws_ami" "ubuntu" {

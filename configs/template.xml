@@ -14,7 +14,7 @@
           <spec></spec>
         </com.cloudbees.jenkins.GitHubPushTrigger>
         <hudson.triggers.SCMTrigger>
-          <spec>H/3 * * * *</spec>
+          <spec>* * * * *</spec>
           <ignorePostCommitHooks>false</ignorePostCommitHooks>
         </hudson.triggers.SCMTrigger>
       </triggers>

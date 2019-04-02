@@ -24,35 +24,66 @@ module "Jenkins" {
 
 module "Web" {
     source                 = "./Web/"
-    subnet_id              = "${aws_subnet.public.id}"
+    subnet_id              = "${aws_subnet.public.id}" #${element(aws_subnet.public.*.id, count.index)}
     key_pair_id            = "${var.key_pair_id}"
     private_key_path       = "${var.private_key_path}"
     security_group_id      = "${aws_security_group.HalfOpen.id}"
 
     
-    count                  = 1
+    count                  = 3
     group_name             = "Web"
 }
 
-#resource"aws_instance""example"{
-#  count = 1
-#
-#	ami           = "${data.aws_ami.ubuntu.id}"
-#	instance_type ="t2.micro"
-#	key_name 	  = "Liyuan-IAM-keypair"
-#
-#	subnet_id = "${element(aws_subnet.public.*.id, count.index)}"	
-#  	vpc_security_group_ids = ["${aws_security_group.HalfOpen.id}"]
-#
-#	tags{
-#	Name="My-Jenkins-Server"
-#	}
-#
+resource "aws_s3_bucket" "web" {
+  bucket = "liyuans-web-elb"
+  acl    = "private"
+
+  policy =<<EOF
+{
+  “Version”: “2012-10-17”,
+  “Statement”: [
+    {
+      “Effect”: “Allow”,
+      “Action”: “s3:PutObject”,
+      “Resource”: “arn:aws:s3:::liyuans-web-elb/*”,
+      “Principal”: {
+        “AWS”: “arn:aws:iam::797873946194:root”,
+      }
+    }
+  ]
+}
+EOF
+
+policy =<<EOF
+{
+"Id": "Policy1509573454872",
+"Version": "2012-10-17",
+"Statement": [
+    {
+    "Sid": "Stmt1509573447773",
+    "Action": "s3:PutObject",
+    "Effect": "Allow",
+    "Resource": "arn:aws:s3:::liyuans-web-elb/*",
+    "Principal": {
+        "AWS": ["797873946194"]
+    }
+    }
+]
+}
+EOF
+  tags = {
+    Name        = "liyuans-web-elb"
+    Environment = "Dev"
+  }
+}
 
 
-#}
-
-
+module "ELB" {
+    source                 = "./ELB/"
+    public_subnet_id       = "${aws_subnet.public.id}"
+    security_group_id      = "${aws_security_group.HalfOpen.id}"
+    instance_ids           = "${module.Web.instance_ids}"
+}
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.EXAMPLE-vpc.id}"
@@ -142,14 +173,6 @@ resource "aws_security_group" "HalfOpen" {
   }
 }
 
-#resource "aws_security_group_rule" "SSH_OnlyIN"{
-#  type = "ingress"
-#  from_port = 22
-#  to_port = 22
-#  protocol = "tcp"
-#  cidr_blocks = ["67.171.25.72/32"]
-#  security_group_id = "${aws_security_group.HalfOpen.id}"
-#}
 
 resource "aws_security_group_rule" "FullyOpenOUT"{
   type = "egress"
