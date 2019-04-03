@@ -1,8 +1,9 @@
 variable "access_key" {
+	default = ""
 
 }
 variable "secret_key" {
-
+	default = ""
 }
 variable "region" {
   description = "AWS region to launch servers."

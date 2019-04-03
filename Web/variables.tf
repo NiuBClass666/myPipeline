@@ -1,9 +1,3 @@
-variable "access_key" {
-  default = "AKIAIQXXFEH3KSRE64RA"
-}
-variable "secret_key" {
-  default = "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"
-}
 variable "region" {
   description = "AWS region to launch servers."
   default = "us-west-2"
