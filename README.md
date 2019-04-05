@@ -12,10 +12,7 @@ https://docs.google.com/presentation/d/1Y7OJjvAg6_5S8JksSPESXkSyz5NOZU78CV0Ot6lU
 For demo purpose, that application repo is fixed. So you can't run it except you have my credentials of github and dockerhub.
 
 However, you can change the application repo to your repo. You need to: 
-#### On jenkins server: 
-1. Change the repo link to your repo in job "autoBuild"'s configuration 
-2. Add your credentials for both github and your image registry
-3. Switch the credential to yours in job "autoBuild"'s configuration 
+
 #### On your repo
 
 The web application repo is at https://github.com/LiyuanWang123/InsightDevopsProject where dockerfile and jenkinsfile are located.
@@ -29,9 +26,16 @@ Then you can follow the instructions below:
 1. Install terraform
 2. Git clone this repo
 3. Input your AWS access_key, secret_key, region preffered, key pair ID and path to your-keypair.pem in variables.tf. (Demo purpose only, Do not left them there and push to your repo!)
-4. terraform init
-5. terraform apply
-6. Now you can find the web application at http://Your-web-EC2-ip:8000 and jenkins server at http://Your-jenkins-EC2-ip:8080
+4. Change the link in ./Web/local-exec.sh to your repo link
+5. terraform init
+6. terraform apply
+
+#### On jenkins server(once its online): 
+1. Change the repo link to your repo in job "autoBuild"'s configuration 
+2. Add your credentials for both github and your image registry
+3. Switch the credential to yours in job "autoBuild"'s configuration 
+
+4. Now you can find the web application at http://Your-web-EC2-ip:8000 and jenkins server at http://Your-jenkins-EC2-ip:8080
 
 
 
