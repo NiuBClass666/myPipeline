@@ -4,7 +4,7 @@
 
 One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC2.
 
-[Link](#) Presentaion Slides.
+https://docs.google.com/presentation/d/1Y7OJjvAg6_5S8JksSPESXkSyz5NOZU78CV0Ot6lU90w/edit?usp=sharing (#) Presentaion Slides.
 
 <hr/>
 
