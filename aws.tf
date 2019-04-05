@@ -22,18 +22,6 @@ module "Jenkins" {
 }
 
 
-module "Web" {
-    source                 = "./Web/"
-    subnet_id              = "${aws_subnet.public.id}" #${element(aws_subnet.public.*.id, count.index)}
-    key_pair_id            = "${var.key_pair_id}"
-    private_key_path       = "${var.private_key_path}"
-    security_group_id      = "${aws_security_group.HalfOpen.id}"
-
-    
-    count                  = 3
-    group_name             = "Web"
-}
-
 resource "aws_s3_bucket" "web" {
   bucket = "liyuans-web-elb"
   acl    = "private"
@@ -77,13 +65,6 @@ EOF
   }
 }
 
-
-module "ELB" {
-    source                 = "./ELB/"
-    public_subnet_id       = "${aws_subnet.public.id}"
-    security_group_id      = "${aws_security_group.HalfOpen.id}"
-    instance_ids           = "${module.Web.instance_ids}"
-}
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.EXAMPLE-vpc.id}"

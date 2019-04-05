@@ -24,11 +24,14 @@ apt-get update
 docker run -d --name jenkins -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 -p 50000:50000 liyuansdockerhub/jenkins 
 
 
-sleep 30
+sleep 2m
 
 chmod 777 /var/run/docker.sock 
 
 java -jar /tmp/jenkins-cli.jar -s http://localhost:8080/ -auth admin:admin create-job autoBuild < /tmp/template.xml
+
+java -jar /tmp/jenkins-cli.jar -s http://localhost:8080/ -auth admin:admin create-job BlueGreenDeploy < /tmp/template2.xml
+
 
 sleep 10
 
