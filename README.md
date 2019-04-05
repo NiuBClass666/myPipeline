@@ -73,8 +73,8 @@ test
 
 ## Tech Stack
 
-Terraform, Jinkins, AWS EC2
+Terraform, Jinkins, AWS EC2, watchTower
 
 ## Way to Demo
 
-Run a website with a video playing while pushing code and deploying the change to the website.
+Run a website with a data science fellow's flask appllication while pushing code and deploying the change to the website.
