@@ -6,7 +6,7 @@ resource"aws_instance""jenkins"{
   key_name               = "${var.key_pair_id}"
   vpc_security_group_ids = ["${var.security_group_id}"]
   subnet_id              = "${var.subnet_id}"
-  user_data              = "${file("./Jenkins/local-exec2.sh")}"
+  user_data              = "${file("./Jenkins/local-exec.sh")}"
 
   tags {
       Name = "${format("%s%02d", var.group_name, count.index + 1)}" # -> "backend02"
@@ -24,11 +24,12 @@ resource"aws_instance""jenkins"{
     connection {
         type     = "ssh"
         user     = "ubuntu"       
-        private_key = "${file("~/.ssh/Liyuan-IAM-keypair2.pem")}"
+        private_key = "${file("${var.private_key_path}")}"
         agent = false
     } 
   }
 }
+
 data "aws_ami" "ubuntu" {
     most_recent = true
 filter {

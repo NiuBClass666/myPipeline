@@ -4,19 +4,13 @@ provider "aws" {
 	region="${var.region}"
 }
 
-resource "aws_vpc" "EXAMPLE-vpc" {
-  cidr_block = "10.0.0.0/16"
-  enable_dns_hostnames = true
-}
-
 module "Jenkins" {
     source                 = "./Jenkins/"
     subnet_id              = "${aws_subnet.public.id}"
     key_pair_id            = "${var.key_pair_id}"
     private_key_path       = "${var.private_key_path}"
     security_group_id      = "${aws_security_group.HalfOpen.id}"
-    
-    
+      
     count                  = 1
     group_name             = "Jenkins"
 }
@@ -28,53 +22,9 @@ module "Web" {
     key_pair_id            = "${var.key_pair_id}"
     private_key_path       = "${var.private_key_path}"
     security_group_id      = "${aws_security_group.HalfOpen.id}"
-
-    
+  
     count                  = 3
     group_name             = "Web"
-}
-
-resource "aws_s3_bucket" "web" {
-  bucket = "liyuans-web-elb"
-  acl    = "private"
-
-  policy =<<EOF
-{
-  “Version”: “2012-10-17”,
-  “Statement”: [
-    {
-      “Effect”: “Allow”,
-      “Action”: “s3:PutObject”,
-      “Resource”: “arn:aws:s3:::liyuans-web-elb/*”,
-      “Principal”: {
-        “AWS”: “arn:aws:iam::797873946194:root”,
-      }
-    }
-  ]
-}
-EOF
-
-policy =<<EOF
-{
-"Id": "Policy1509573454872",
-"Version": "2012-10-17",
-"Statement": [
-    {
-    "Sid": "Stmt1509573447773",
-    "Action": "s3:PutObject",
-    "Effect": "Allow",
-    "Resource": "arn:aws:s3:::liyuans-web-elb/*",
-    "Principal": {
-        "AWS": ["797873946194"]
-    }
-    }
-]
-}
-EOF
-  tags = {
-    Name        = "liyuans-web-elb"
-    Environment = "Dev"
-  }
 }
 
 module "ELB" {
@@ -82,6 +32,13 @@ module "ELB" {
     public_subnet_id       = "${aws_subnet.public.id}"
     security_group_id      = "${aws_security_group.HalfOpen.id}"
     instance_ids           = "${module.Web.instance_ids}"
+}
+
+#Followning resources create Network
+#(VPC, gw, subnet, route, security group with rules)
+resource "aws_vpc" "EXAMPLE-vpc" {
+  cidr_block = "10.0.0.0/16"
+  enable_dns_hostnames = true
 }
 
 resource "aws_internet_gateway" "igw" {
@@ -180,6 +137,50 @@ resource "aws_security_group_rule" "FullyOpenOUT"{
   protocol = "-1"
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.HalfOpen.id}"
+}
+
+#Create a S3 bucket to Store ELB access logs
+resource "aws_s3_bucket" "web" {
+  bucket = "liyuans-web-elb"
+  acl    = "private"
+
+  policy =<<EOF
+{
+  “Version”: “2012-10-17”,
+  “Statement”: [
+    {
+      “Effect”: “Allow”,
+      “Action”: “s3:PutObject”,
+      “Resource”: “arn:aws:s3:::liyuans-web-elb/*”,
+      “Principal”: {
+        “AWS”: “arn:aws:iam::797873946194:root”,
+      }
+    }
+  ]
+}
+EOF
+
+policy =<<EOF
+{
+"Id": "Policy1509573454872",
+"Version": "2012-10-17",
+"Statement": [
+    {
+    "Sid": "Stmt1509573447773",
+    "Action": "s3:PutObject",
+    "Effect": "Allow",
+    "Resource": "arn:aws:s3:::liyuans-web-elb/*",
+    "Principal": {
+        "AWS": ["797873946194"]
+    }
+    }
+]
+}
+EOF
+  tags = {
+    Name        = "liyuans-web-elb"
+    Environment = "Dev"
+  }
 }
 
 data "aws_availability_zones" "available" {}
