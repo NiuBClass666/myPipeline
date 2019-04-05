@@ -1,0 +1,11 @@
+version: '3.1'
+ 
+services:
+ 
+  main:
+    image: liyuansdockerhub/jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+ 
+
