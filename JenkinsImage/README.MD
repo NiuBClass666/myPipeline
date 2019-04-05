@@ -1,4 +1,8 @@
-Configured Jenkins Pipeline 
+Pre-configured Jenkins Pipeline 
 
-1. Need build this image to create mypipeline
+Skipped InitialSetUpWizard
+
+Add an admin with username: admin, and password: admin
+
+
 
