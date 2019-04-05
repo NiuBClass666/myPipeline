@@ -12,11 +12,11 @@ One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC
 For demo purpose, that application repo is fixed. So you can't run it except you have my credentials of github and dockerhub.
 
 However, you can change the application repo to your repo. You need to: 
-# On jenkins server: 
+#### On jenkins server: 
 *Change the repo link to your repo in job "autoBuild"'s configuration 
 *Add your credentials for both github and your image registry
 *Switch the credential to yours in job "autoBuild"'s configuration 
-# On your repo
+#### On your repo
 *Get jenkinsfile and dockerfile from my repo
 
 
