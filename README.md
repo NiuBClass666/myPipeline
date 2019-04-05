@@ -13,18 +13,16 @@ For demo purpose, that application repo is fixed. So you can't run it except you
 
 However, you can change the application repo to your repo. You need to: 
 #### On jenkins server: 
-*Change the repo link to your repo in job "autoBuild"'s configuration 
-*Add your credentials for both github and your image registry
-*Switch the credential to yours in job "autoBuild"'s configuration 
+Markup : *Change the repo link to your repo in job "autoBuild"'s configuration 
+         *Add your credentials for both github and your image registry
+         *Switch the credential to yours in job "autoBuild"'s configuration 
 #### On your repo
-*Get jenkinsfile and dockerfile from my repo
-
 
 The web application repo is at https://github.com/LiyuanWang123/InsightDevopsProject where dockerfile and jenkinsfile are located.
 
-
-*In Jenkinsfile, in last step, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
-*Put jenkinsfile into your repo and the dockerfile to your repo. 
+Markup : *Get jenkinsfile and dockerfile from the repo
+         *In Jenkinsfile, in last step, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
+         *Put jenkinsfile into your repo and the dockerfile to your repo. 
 
 Then you can follow the instructions below:  
 
