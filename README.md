@@ -44,7 +44,7 @@ located.
 2. Add your credentials for both github and your image registry
 3. Switch the credential to yours in job "autoBuild"'s configuration 
 
-4. Now you can find the web application at http://Your-web-EC2-ip:8000 which can automatically update itself when you commit code to your web application repo.
+4. Now you can find your web application at Green ELB DNS domain and Blue ELB DNS domain. Terminate either one group(blue or green) of EC2 instances. When you commit new code to your web application repo, that group will be built up again with the latest version of your application. Therefore, you can choose either keep or destroy the servers with older version depending on whether the latest one works properly. Just remember re-route your user traffic to ELB DNS domain of the group you chose to keep before destroy the other one, so there won't be any downtime.  
 
 
 
