@@ -35,7 +35,7 @@ The web application repo is at https://github.com/LiyuanWang123/InsightDevopsPro
 2. Add your credentials for both github and your image registry
 3. Switch the credential to yours in job "autoBuild"'s configuration 
 
-4. Now you can find the web application at http://Your-web-EC2-ip:8000 which can automatically update itself when you commit code to your web application repo.
+4. Now you can find the web application at your ELB DNS domain(Find on aws console>EC2>Load Balancer) which can automatically update itself when you commit code to your web application repo.
 
 
 
