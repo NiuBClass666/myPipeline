@@ -60,7 +60,7 @@ Today's developers who use repositories like github always face a problem when t
 
 ## Architecture
 
-I use Terraform to set up and provision my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detect code change in repo, build new image and send it to a registry like dockerhub. At last, I use watchTower on web servers to detect if there is new image pushed to registry, so if it found a new image, it would ask docker to re-build the application container.
+I use Terraform to set up and provision my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detect code change in repo, build new image and send it to a registry like dockerhub. At last, jenkins will execute some terraform scripts to build up two groups of web servers(blue/green) with two ELBs. At start, these two groups will carry the same version of web application. So we delete one group so that when new code is committed, that group will be built up gain but with the latest application(with newer code). Then we can choose either to keep user traffic at the old elb dns domain or re-route to the newer elb dns domain. 
 
 ## Engineering challenges
 
