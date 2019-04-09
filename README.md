@@ -21,7 +21,7 @@ The web application repo is at https://github.com/LiyuanWang123/InsightDevopsPro
 2. In Jenkinsfile, in last step, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
 3. Put jenkinsfile into your repo and the dockerfile to your repo. 
 
-Then you can follow the instructions below:  
+#### On your Host machine 
 
 1. Install terraform
 2. Git clone this repo
@@ -30,12 +30,12 @@ Then you can follow the instructions below:
 5. terraform init
 6. terraform apply
 
-#### On jenkins server(once its online): 
+#### On jenkins server(once its online, you can find it on http://Your-jenkins-EC2-ip:8080): 
 1. Change the repo link to your repo in job "autoBuild"'s configuration 
 2. Add your credentials for both github and your image registry
 3. Switch the credential to yours in job "autoBuild"'s configuration 
 
-4. Now you can find the web application at http://Your-web-EC2-ip:8000 and jenkins server at http://Your-jenkins-EC2-ip:8080
+4. Now you can find the web application at http://Your-web-EC2-ip:8000 which can automatically update itself when you commit code to your web application repo.
 
 
 
