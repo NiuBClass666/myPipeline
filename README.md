@@ -28,7 +28,7 @@ located.
 2. In Jenkinsfile, in last step, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
 3. Put jenkinsfile into your web application repo and the dockerfile to your web application repo. 
 
-Then you can follow the instructions below:  
+#### On your Host machine
 
 1. Install terraform
 2. Go to the folder where you store this myPipeline repo
