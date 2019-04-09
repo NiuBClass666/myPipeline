@@ -8,6 +8,15 @@ https://docs.google.com/presentation/d/1Y7OJjvAg6_5S8JksSPESXkSyz5NOZU78CV0Ot6lU
 
 <hr/>
 
+## Introduction
+
+Today's developers who use repositories like github always face a problem when they try to integrate and deploy the new change becasue there are always reptitive work and long period of waiting for operation teams' feedback. My project is to build a one-click set-up CI/CD pipeline which does build, test and deployment automatically. 
+
+## Architecture
+
+I use Terraform to set up and provision my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detect code change in repo, build new image and send it to a registry like dockerhub. At last, jenkins will execute some terraform scripts to build up two groups of web servers(blue/green) with two ELBs. At start, these two groups will carry the same version of web application. So we delete one group so that when new code is committed, that group will be built up gain but with the latest application(with newer code). Then we can choose either to keep user traffic at the old elb dns domain or re-route to the newer elb dns domain. 
+
+
 ## How to install and get it up and running
 For demo purpose, that application repo is fixed. So you can't run it except you have my credentials of github and dockerhub.
 
@@ -54,13 +63,7 @@ located.
 
 <hr/>
 
-## Introduction
 
-Today's developers who use repositories like github always face a problem when they try to integrate and deploy the new change becasue there are always reptitive work and long period of waiting for operation teams' feedback. My project is to build a one-click set-up CI/CD pipeline which does build, test and deployment automatically. 
-
-## Architecture
-
-I use Terraform to set up and provision my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detect code change in repo, build new image and send it to a registry like dockerhub. At last, jenkins will execute some terraform scripts to build up two groups of web servers(blue/green) with two ELBs. At start, these two groups will carry the same version of web application. So we delete one group so that when new code is committed, that group will be built up gain but with the latest application(with newer code). Then we can choose either to keep user traffic at the old elb dns domain or re-route to the newer elb dns domain. 
 
 ## Engineering challenges
 
