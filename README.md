@@ -20,30 +20,31 @@ located.
 1. Git clone this myPipeline repo
 2. Go to JenkinsImage folder 
 3. Input your AWS access_key, secret_key, region preffered, key pair ID and path to your-keypair.pem in variables.tf. (Demo purpose only, Do not left them there and push to your repo!)
-4. Save
+4. Save and use docker (you need install docker first) to do docker image build -t your-dockerhub/your-jenkins-image .
+5. Push this image to your jenkins image registry(dockerhub)
 
 #### On your web application repo
 
 1. Get jenkinsfile and dockerfile from the web application repo
-2. In Jenkinsfile, in last step, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
+2. In Jenkinsfile, in last step section, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
 3. Put jenkinsfile into your web application repo and the dockerfile to your web application repo. 
 
 #### On your Host machine
 
 1. Install terraform
 2. Go to the folder where you store this myPipeline repo
-3. Input your AWS access_key, secret_key, region preffered, key pair ID and path to your-keypair.pem in variables.tf. (Demo purpose only, Do not left them there and push to your repo!)
-4. Change the link in ./Web/local-exec.sh to your web application repo link
-5. terraform init
-6. terraform apply
+3. Change the liyuansdockerhub/jenkins in ./Jenkins/local-exec2.sh to your dockerhub-account/jenkins-image-name which you just built.
+4. Input your AWS access_key, secret_key, region preffered, key pair ID and path to your-keypair.pem in variables.tf. (Demo purpose only, Do not left them there and push to your repo!)
+5. Change the link in ./Web/local-exec.sh to your web application repo link
+6. terraform init
+7. terraform apply
 
-#### On jenkins server(once its online): 
+#### On jenkins server(once its online, you can find it on http://Your-jenkins-EC2-ip:8080): 
 1. Change the repo link to your web application repo in job "autoBuild"'s configuration 
 2. Add your credentials for both github and your image registry
 3. Switch the credential to yours in job "autoBuild"'s configuration 
 
-4. Now you can find the web application at http://Your-web-EC2-ip:8000 and jenkins server at http://Your-jenkins-EC2-ip:8080
-
+4. Now you can find the web application at http://Your-web-EC2-ip:8000 which can automatically update itself when you commit code to your web application repo.
 
 
 
