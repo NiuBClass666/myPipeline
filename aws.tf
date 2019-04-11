@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 module "Jenkins" {
-    source                 = "./Jenkins/"
+    source                 = "./Jenkins"
     subnet_id              = "${aws_subnet.public.id}"
     key_pair_id            = "${var.key_pair_id}"
     private_key_path       = "${var.private_key_path}"
@@ -17,7 +17,7 @@ module "Jenkins" {
 
 
 module "Web" {
-    source                 = "./Web/"
+    source                 = "./Web"
     subnet_id              = "${aws_subnet.public.id}" #${element(aws_subnet.public.*.id, count.index)}
     key_pair_id            = "${var.key_pair_id}"
     private_key_path       = "${var.private_key_path}"
@@ -28,7 +28,7 @@ module "Web" {
 }
 
 module "ELB" {
-    source                 = "./ELB/"
+    source                 = "./ELB"
     public_subnet_id       = "${aws_subnet.public.id}"
     security_group_id      = "${aws_security_group.HalfOpen.id}"
     instance_ids           = "${module.Web.instance_ids}"
@@ -110,6 +110,14 @@ resource "aws_security_group" "HalfOpen" {
     to_port   = 80
     protocol  = "tcp"
     cidr_blocks = ["67.171.25.72/32", "75.172.35.109/32"]
+  }
+
+  ingress{
+
+      from_port = 5000
+      to_port   = 5000
+      protocol  = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress{

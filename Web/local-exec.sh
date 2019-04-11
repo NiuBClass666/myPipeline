@@ -9,5 +9,5 @@ apt-get update
 apt-get install -y docker-ce
 
 #Run two containers, one with the application, the other one with Tool watchTower
-docker run -d   --name web --rm -p 8000:8000 liyuansdockerhub/insight_project
-docker run -d   --name watchtower   -v /var/run/docker.sock:/var/run/docker.sock  v2tec/watchtower -i 30
+docker run -d   --name web --rm -p 5000:5000 liyuansdockerhub/insight_project
+docker run -d   --name watchtower   -v /var/run/docker.sock:/var/run/docker.sock  v2tec/watchtower --cleanup -i 30

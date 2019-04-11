@@ -22,7 +22,7 @@ variable "group_name" {
 
 variable "instance_type" {
   description = "AWS region to launch servers."
-  default     = "t2.micro"
+  default     = "t2.medium"
 }
 
 variable "subnet_id" {
