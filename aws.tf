@@ -139,6 +139,14 @@ resource "aws_security_group" "HalfOpen" {
 
   ingress{
 
+      from_port = 5000
+      to_port   = 5000
+      protocol  = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  ingress{
+
     from_port = 8000
     to_port   = 8000
     protocol  = "tcp"
