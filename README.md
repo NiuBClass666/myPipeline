@@ -68,13 +68,11 @@ The web application repo is at https://github.com/LiyuanWang123/DemoWebApplicati
 
 ## Engineering challenges
 
-1.Automation of Jenkins configuration
+1.Terraform Provision EC2 Instances
 
-2.Terraform Provision EC2 Instances
+2.Automation of Jenkins configuration
 
 3.Minimize downtime during deployment
-
-## Trade-offs
 
 
 ## Business Value 
@@ -85,12 +83,10 @@ Speed up development cycles, 0 downtime.
 
 One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC2.
 
-test
-
 ## Tech Stack
 
-Terraform, Jinkins, AWS EC2, watchTower
+Terraform, Jenkins, AWS EC2, AWS ELB, AWS S3, watchTower
 
 ## Way to Demo
 
-Run a website with a data science fellow's flask appllication while pushing code and deploying the change to the website.
+A video which shows how to automatically deploy the latest web application of an Insight Data Science fellow by committing a change of code to github.  
