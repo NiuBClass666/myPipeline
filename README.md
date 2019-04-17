@@ -28,7 +28,7 @@ For demo purpose, that application repo is fixed. So you can't run it except you
 
 However, you can change the application repo to your repo. You need to: 
 
-The web application repo is at https://github.com/LiyuanWang123/InsightDevopsProject where dockerfile and jenkinsfile are 
+The web application repo is at https://github.com/LiyuanWang123/DemoWebApplication where dockerfile and jenkinsfile are 
 located.
 
 #### Rebuild jenkins image
