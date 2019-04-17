@@ -17,6 +17,7 @@ resource"aws_instance""jenkins"{
     create_before_destroy = true
   }
 
+  #Copy pre-configured jenkins jobs and credentials as xml files to server
   provisioner "file" {
     source      = "configs/"
     destination = "/tmp"
