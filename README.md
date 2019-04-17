@@ -16,9 +16,11 @@ Today's developers who use repositories like github always face a problem when t
 I have 2 different architectures due to different deployment strategies.
 
 1. watchTower Deployment with 2 seconds downtime (master branch)
+
 I used Terraform to set up and provisioned my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detects code change in repo, builds new image and pushed it to a registry like dockerhub. At last, I used a tool called watchTower on web servers to detect if there is a new image pushed to a registry. So if there was one, it would ask docker to re-build the application container.
 
 2. Blue/Green Deployment with 0 downtime. (blueGreen branch)
+
 The first part which involves terraform and jenkins is the same as the first archetecture. The difference is that instead of ussing the tool watchTower, a new job is added to the Jenkins server. Once Jenkins pushes the latest image to a registry, this new job executes some terraform scripts to set up and provision a new group of EC2 instances as green servers. Then we will have a group of web servers which carry the older application (blue) and green web servers which carry the latest application. 
 At last, we can re-route the user traffic from blue to green by using AWS route53 weighted routing policy. There will not be any downtime because user will either go to blue or green servers while we are re-routing traffic. Finally all users will go to green servers with the latest application. 
 
