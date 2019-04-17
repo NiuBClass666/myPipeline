@@ -13,9 +13,14 @@ https://docs.google.com/presentation/d/1Y7OJjvAg6_5S8JksSPESXkSyz5NOZU78CV0Ot6lU
 Today's developers who use repositories like github always face a problem when they try to integrate and deploy the new change becasue there are always reptitive work and long period of waiting for operation teams' feedback. My project is to build a one-click set-up CI/CD pipeline which does build, test and deployment automatically. 
 
 ## Architecture
+I have 2 different architectures due to different deployment strategies.
 
-I use Terraform to set up and provision my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detect code change in repo, build new image and send it to a registry like dockerhub. At last, I use watchTower on web servers to detect if there is new image pushed to registry, so if it found a new image, it would ask docker to re-build the application container.
+1. watchTower Deployment with 2 seconds downtime (master branch)
+I used Terraform to set up and provisioned my AWS EC2 instances with Jenkins and Docker. Jenkins does the most job of the pipeline who automatically detects code change in repo, builds new image and pushed it to a registry like dockerhub. At last, I used a tool called watchTower on web servers to detect if there is a new image pushed to a registry. So if there was one, it would ask docker to re-build the application container.
 
+2. Blue/Green Deployment with 0 downtime. (blueGreen branch)
+The first part which involves terraform and jenkins is the same as the first archetecture. The difference is that instead of ussing the tool watchTower, a new job is added to the Jenkins server. Once Jenkins pushes the latest image to a registry, this new job executes some terraform scripts to set up and provision a new group of EC2 instances as green servers. Then we will have a group of web servers which carry the older application (blue) and green web servers which carry the latest application. 
+At last, we can re-route the user traffic from blue to green by using AWS route53 weighted routing policy. There will not be any downtime because user will either go to blue or green servers while we are re-routing traffic. Finally all users will go to green servers with the latest application. 
 
 ## How to install and get it up and running
 For demo purpose, that application repo is fixed. So you can't run it except you have my credentials of github and dockerhub.
@@ -24,7 +29,7 @@ However, you can change the application repo to your repo. You need to:
 
 #### On your repo
 
-The web application repo is at https://github.com/LiyuanWang123/InsightDevopsProject where dockerfile and jenkinsfile are located.
+The web application repo is at https://github.com/LiyuanWang123/DemoWebApplication where dockerfile and jenkinsfile are located.
 
 1. Get jenkinsfile and dockerfile from the repo
 2. In Jenkinsfile, in last step, you need to change the registry(mine is dockerhub) link to your image registry and the credential ID to match the Newly added credential on jenkins server
