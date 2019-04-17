@@ -94,7 +94,7 @@ One-click to set-up a working CI/CD piepline using Terraform, Jenkins and AWS EC
 
 ## Tech Stack
 
-Terraform, Jenkins, AWS EC2, watchTower, AWS route53, AWS ELB
+Terraform, Jenkins, AWS EC2, AWS route53, AWS ELB, AWS S3
 
 ## Way to Demo
 
