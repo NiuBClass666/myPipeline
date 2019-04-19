@@ -7,7 +7,7 @@ echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/source
 apt-get install -y python-software-properties debconf-utils
 
 apt update
-apt install openjdk-8-jdk
+apt install openjdk-8-jdk -y
 
 
 apt-get update
