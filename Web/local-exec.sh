@@ -13,4 +13,4 @@ docker run -d   --name web --rm -p 5000:5000 liyuansdockerhub/insight_project
 
 sleep 30s
 
-docker run -d   --name watchtower   -v /var/run/docker.sock:/var/run/docker.sock  v2tec/watchtower --cleanup -i 30
+docker run -d   --name watchtower   -v /var/run/docker.sock:/var/run/docker.sock  v2tec/watchtower -i 30
